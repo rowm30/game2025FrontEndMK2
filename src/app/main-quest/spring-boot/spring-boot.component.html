@@ -1,0 +1,39 @@
+<div class="spring-boot-stage-container">
+  <h1>Spring Boot Quest: Topics</h1>
+  <p class="quest-description">
+    Complete the topics below to master the Spring Boot Quest. Mark each topic as completed once you achieve the required understanding.
+  </p>
+
+  <!-- Progress Section -->
+  <div class="progress-section">
+    <div class="progress-bar">
+      <div class="progress" [style.width.%]="progress"></div>
+    </div>
+    <p class="progress-text">{{ progress | number:'1.0-2' }}% Completed</p>
+  </div>
+
+  <!-- Topics List -->
+  <div class="topics-list">
+    <div class="topic-card" *ngFor="let topic of topics; let i = index">
+      <div class="topic-header">
+        <h2>{{ topic.name }}</h2>
+        <input
+          type="checkbox"
+          [checked]="topic.completed"
+          (change)="toggleTopicCompletion(i)"
+        />
+      </div>
+      <p>{{ topic.description }}</p>
+    </div>
+  </div>
+
+  <!-- Additional Completion Percentages -->
+  <div class="completion-stats">
+    <p>Sub-Quest Completion: {{ subQuestCompletion | number:'1.0-2' }}%</p>
+    <p>Main Quest Completion: {{ mainQuestCompletion | number:'1.0-2' }}%</p>
+    <p>Side Quest Completion: {{ sideQuestCompletion | number:'1.0-2' }}%</p>
+    <p>Overall Completion: {{ overallCompletion | number:'1.0-2' }}%</p>
+  </div>
+
+  <button (click)="goBack()" class="back-button">Back to Main Quest</button>
+</div>

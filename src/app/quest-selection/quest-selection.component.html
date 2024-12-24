@@ -1,0 +1,26 @@
+<div class="quest-container">
+  <h1>Choose Your Quest</h1>
+  <div class="quest-buttons">
+    <!-- Main Quest Button -->
+    <div class="quest-button-container">
+      <button routerLink="/main-quest" class="quest-button">
+        Main Quest
+      </button>
+      <div class="progress-bar">
+        <div class="progress" [style.width.%]="mainQuestProgress"></div>
+      </div>
+      <p class="progress-text">{{ mainQuestProgress }}% Completed</p>
+    </div>
+
+    <!-- Side Quest Button -->
+    <div class="quest-button-container">
+      <button routerLink="/side-quest" class="quest-button secondary">
+        Side Quest
+      </button>
+      <div class="progress-bar">
+        <div class="progress" [style.width.%]="sideQuestProgress"></div>
+      </div>
+      <p class="progress-text">{{ sideQuestProgress }}% Completed</p>
+    </div>
+  </div>
+</div>

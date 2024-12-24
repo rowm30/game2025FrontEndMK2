@@ -1,0 +1,10 @@
+<div class="welcome-container">
+  <h1>Welcome, {{ username }}!</h1>
+  <div class="progress-button" (click)="goToQuestSelection()">
+    <span>Start Game</span>
+    <div class="progress-bar">
+      <div class="progress" [style.width.%]="gameProgress"></div>
+    </div>
+    <p class="progress-text">{{ gameProgress }}% Completed</p>
+  </div>
+</div>

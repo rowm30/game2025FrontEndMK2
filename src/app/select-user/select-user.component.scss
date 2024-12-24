@@ -1,0 +1,71 @@
+.user-id-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #673ab7, #512da8);
+  color: white;
+
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .description {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+  }
+
+  .existing-users,
+  .new-user {
+    margin-bottom: 2rem;
+    width: 80%;
+    max-width: 500px;
+
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+
+      li {
+        padding: 1rem;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 5px;
+        margin-bottom: 0.5rem;
+        cursor: pointer;
+        text-align: center;
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.3);
+        }
+      }
+    }
+
+    input {
+      width: 100%;
+      padding: 0.8rem;
+      border: none;
+      border-radius: 5px;
+      margin-bottom: 1rem;
+    }
+
+    button {
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      background-color: #4caf50;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      color: white;
+
+      &:hover {
+        background-color: #388e3c;
+      }
+    }
+  }
+}

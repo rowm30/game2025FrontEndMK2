@@ -1,0 +1,85 @@
+.java-stage-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1e88e5, #1565c0);
+  color: white;
+  font-family: 'Arial', sans-serif;
+
+  h1, .quest-description, .progress-section, .back-button {
+    max-width: 960px; // Ensures alignment and consistent width
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .progress-section {
+    width: 100%;
+    .progress-bar {
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      height: 15px;
+      .progress {
+        background-color: #ffeb3b;
+        height: 100%;
+        transition: width 0.4s ease-in-out;
+      }
+    }
+    .progress-text {
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.9);
+      margin-top: 0.5rem;
+    }
+  }
+
+  .topics-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); // Creates three columns
+    grid-gap: 20px;
+    width: 100%;
+
+    .topic-card {
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      transition: background-color 0.4s, color 0.3s;
+      &:nth-child(odd) {
+        background-color: #0a2e36; // Dark blue for odd cards
+      }
+      &:nth-child(even) {
+        background-color: #064045; // A different dark blue for even cards
+      }
+      &.completed {
+        background-color: #03363d; // Even darker shade for completed cards
+        h2, p {
+          text-decoration: line-through;
+          color: #bbbbbb; // Light grey for strikethrough text
+        }
+      }
+      h2, p {
+        margin: 0 0 10px 0;
+        transition: color 0.3s;
+      }
+    }
+  }
+
+  .back-button {
+    padding: 0.8rem 2rem;
+    margin-top: 20px;
+    background-color: #ff6f61;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    &:hover {
+      background-color: #e64a19;
+      transform: translateY(-2px);
+    }
+  }
+}

@@ -1,0 +1,25 @@
+<div class="java-stage-container">
+  <h1>Java Quest: Topics</h1>
+  <p class="quest-description">
+    Complete the topics below to master the Java Quest. Mark each topic as completed once you achieve the required understanding.
+  </p>
+
+  <!-- Progress Section -->
+  <div class="progress-section">
+    <div class="progress-bar">
+      <div class="progress" [style.width.%]="progress"></div>
+    </div>
+    <p class="progress-text">{{ progress | number:'1.0-2' }}% Completed</p>
+  </div>
+
+  <!-- Topics Grid -->
+  <div class="topics-grid">
+    <div class="topic-card" *ngFor="let topic of topics; let i = index" [class.completed]="topic.completed">
+      <h2>{{ topic.name }}</h2>
+      <p>{{ topic.description }}</p>
+      <input type="checkbox" [checked]="topic.completed" (change)="toggleTopicCompletion(i)"/>
+    </div>
+  </div>
+
+  <button (click)="goBack()" class="back-button">Back to Main Quest</button>
+</div>

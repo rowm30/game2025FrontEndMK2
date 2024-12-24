@@ -1,0 +1,20 @@
+<div class="side-quest-container">
+  <h1>Side Quest</h1>
+  <p class="quest-description">
+    Select a side quest to enhance your skills. Complete all stages to finish the quest!
+  </p>
+
+  <div class="quest-buttons">
+    <div class="quest-button-container" *ngFor="let quest of sideQuests">
+      <button (click)="selectQuest(quest)" class="quest-button">
+        {{ quest.name }}
+      </button>
+      <div class="progress-bar">
+        <div class="progress" [style.width.%]="quest.progress"></div>
+      </div>
+      <p class="progress-text">{{ quest.progress }}% Completed</p>
+    </div>
+  </div>
+
+  <button (click)="goBack()" class="back-button">Back to Quest Selection</button>
+</div>

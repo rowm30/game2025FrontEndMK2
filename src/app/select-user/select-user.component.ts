@@ -27,7 +27,7 @@ export class SelectUserComponent implements OnInit {
   }
 
   fetchUsers(): void {
-    this.http.get<any[]>('http://localhost:8080/user/getAll').subscribe(
+    this.http.get<any[]>('http://20.244.92.201:8080/user/getAll').subscribe(
       data => {
         this.users = data;
       },
@@ -53,7 +53,7 @@ export class SelectUserComponent implements OnInit {
   createUser(): void {
     if (this.newUsername.trim()) {
       const newUser = { username: this.newUsername, overallProgress: 0 };
-      this.http.post('http://localhost:8080/user/create', newUser).subscribe(
+      this.http.post('http://20.244.92.201:8080/user/create', newUser).subscribe(
         () => {
           this.newUsername = ''; // Clear the input field
           this.fetchUsers(); // Refresh the user list

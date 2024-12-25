@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, HostListener, OnInit, QueryList, ViewChildren} from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import {environment} from "../../enviroment";
@@ -29,6 +29,7 @@ export class JavaComponent implements OnInit {
   sideQuestCompletion: number = 0;
   overallCompletion: number = 0;
 
+  @ViewChildren('checkbox') checkboxes!: QueryList<ElementRef<HTMLInputElement>>;
 
   constructor(private router: Router, private http: HttpClient) {}
 
@@ -37,7 +38,7 @@ export class JavaComponent implements OnInit {
   }
 
   loadTopics(): void {
-    const userId = localStorage.getItem('selectedUserId') || '7';
+    const userId = localStorage.getItem('selectedUserId') || '1';
     const apiUrl = `${environment.apiBaseUrl}/api/quests/user/${userId}`;
 
     this.http.get<any>(apiUrl, {
@@ -55,11 +56,31 @@ export class JavaComponent implements OnInit {
     });
   }
 
+  toggleCard(index: number): void {
+    this.checkboxes.toArray()[index].nativeElement.click(); // Programmatically click the checkbox
+  }
+
+
+
   toggleTopicCompletion(index: number): void {
     const topic = this.topics[index];
     topic.completed = !topic.completed;
     this.calculateProgress();
     // Optionally, you could also update this change on the server here
+    const userId = localStorage.getItem('selectedUserId') || '1';
+    const updateUrl = `${environment.apiBaseUrl}/api/user-progress/update`;
+
+    this.http.post(updateUrl, {
+      userId: userId,
+      topicId: this.topics[index].id,
+      completed: this.topics[index].completed,
+    }).subscribe({
+      next: () => {
+        console.log('Progress updated successfully');
+        this.calculateProgress();
+      },
+      error: (err) => console.error('Error updating progress:', err),
+    });
   }
 
   calculateProgress(): void {
@@ -70,5 +91,14 @@ export class JavaComponent implements OnInit {
 
   goBack(): void {
     this.router.navigate(['/main-quest']);
+  }
+
+  isMobile(): boolean {
+    return window.innerWidth <= 767; // Adjust breakpoint as needed
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    // Optional: You could recalculate some layout related variables here if needed on resize
   }
 }

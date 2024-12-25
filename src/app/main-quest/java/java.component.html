@@ -1,10 +1,9 @@
-<div class="java-stage-container">
+<div class="java-stage-container" [class.phone]="isMobile()">
   <h1>Java Quest: Topics</h1>
   <p class="quest-description">
     Complete the topics below to master the Java Quest. Mark each topic as completed once you achieve the required understanding.
   </p>
 
-  <!-- Progress Section -->
   <div class="progress-section">
     <div class="progress-bar">
       <div class="progress" [style.width.%]="progress"></div>
@@ -12,12 +11,11 @@
     <p class="progress-text">{{ progress | number:'1.0-2' }}% Completed</p>
   </div>
 
-  <!-- Topics Grid -->
-  <div class="topics-grid">
-    <div class="topic-card" *ngFor="let topic of topics; let i = index" [class.completed]="topic.completed">
+  <div class="topics-grid" [class.phone-grid]="isMobile()">
+    <div class="topic-card" *ngFor="let topic of topics; let i = index" [class.completed]="topic.completed" (click)="toggleCard(i)">
       <h2>{{ topic.name }}</h2>
       <p>{{ topic.description }}</p>
-      <input type="checkbox" [checked]="topic.completed" (change)="toggleTopicCompletion(i)"/>
+      <input type="checkbox" [checked]="topic.completed" (change)="toggleTopicCompletion(i)" #checkbox/>
     </div>
   </div>
 

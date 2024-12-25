@@ -9,8 +9,10 @@
   font-family: 'Arial', sans-serif;
 
   h1, .quest-description, .progress-section, .back-button {
-    max-width: 960px; // Ensures alignment and consistent width
+    max-width: 960px;
     text-align: center;
+    margin-left: auto; // Center even on wider screens
+    margin-right: auto;
   }
 
   h1 {
@@ -18,8 +20,13 @@
     margin-bottom: 1rem;
   }
 
+  .quest-description {
+    padding: 0 1rem; // Add some side padding on larger screens
+  }
+
   .progress-section {
     width: 100%;
+    max-width: 960px; // Match other elements
     .progress-bar {
       background-color: rgba(255, 255, 255, 0.2);
       border-radius: 10px;
@@ -39,9 +46,10 @@
 
   .topics-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); // Creates three columns
+    grid-template-columns: repeat(3, 1fr);
     grid-gap: 20px;
     width: 100%;
+    max-width: 960px; // Match other elements
 
     .topic-card {
       padding: 20px;
@@ -49,16 +57,16 @@
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
       transition: background-color 0.4s, color 0.3s;
       &:nth-child(odd) {
-        background-color: #0a2e36; // Dark blue for odd cards
+        background-color: #0a2e36;
       }
       &:nth-child(even) {
-        background-color: #064045; // A different dark blue for even cards
+        background-color: #064045;
       }
       &.completed {
-        background-color: #03363d; // Even darker shade for completed cards
+        background-color: #03363d;
         h2, p {
           text-decoration: line-through;
-          color: #bbbbbb; // Light grey for strikethrough text
+          color: #bbbbbb;
         }
       }
       h2, p {
@@ -80,6 +88,37 @@
     &:hover {
       background-color: #e64a19;
       transform: translateY(-2px);
+    }
+  }
+
+  // Media Queries for Responsiveness
+  @media (max-width: 768px) { // Tablet and smaller
+    .topics-grid {
+      grid-template-columns: repeat(2, 1fr); // Two columns on tablet
+    }
+    h1 {
+      font-size: 2rem; // Smaller heading on smaller screens
+    }
+  }
+
+  @media (max-width: 480px) { // Phone
+    padding: 1rem; // Reduce padding on phone
+    .topics-grid {
+      grid-template-columns: 1fr; // Single column on phone
+      grid-gap: 10px;
+    }
+    .topic-card {
+      padding: 15px; // Reduce padding on cards for phone
+    }
+    h1 {
+      font-size: 1.7rem;
+    }
+    .quest-description {
+      font-size: 0.9rem;
+    }
+    .back-button {
+      font-size: 0.9rem;
+      padding: 0.6rem 1.5rem;
     }
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import {environment} from "../enviroment";
@@ -43,4 +43,6 @@ export class MainQuestComponent implements OnInit {
   goBack(): void {
     this.router.navigate(['/quest-selection']);
   }
+
+
 }

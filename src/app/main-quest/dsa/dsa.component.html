@@ -14,18 +14,26 @@
 
   <!-- Topics List -->
   <div class="topics-list">
-    <div class="topic-card" *ngFor="let topic of topics; let i = index">
+    <div class="topic-card" *ngFor="let topic of topics; let i = index" (click)="toggleCard(i)" [class.completed]="topic.completed">
       <div class="topic-header">
-        <h2>{{ topic.name }}</h2>
-        <input
-          type="checkbox"
-          [checked]="topic.completed"
-          (change)="toggleTopicCompletion(i)"
-        />
+        <h2 [class.completed-text]="topic.completed">{{ topic.name }}</h2>
+        <input type="checkbox"
+               [checked]="topic.completed"
+               (change)="toggleTopicCompletion(i)"
+               #checkbox>
       </div>
-      <p>{{ topic.description }}</p>
+      <p [class.completed-text]="topic.completed">
+        <ng-container *ngIf="topic.description?.startsWith('https'); else normalDescription">
+          <a [href]="topic.description" target="_blank">{{ topic.description }}</a>
+        </ng-container>
+        <ng-template #normalDescription>
+          {{ topic.description }}
+        </ng-template>
+      </p>
     </div>
   </div>
+
+
 
   <!-- Additional Completion Percentages -->
   <div class="completion-stats">

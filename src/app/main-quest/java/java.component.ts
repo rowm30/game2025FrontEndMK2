@@ -38,7 +38,7 @@ export class JavaComponent implements OnInit {
   }
 
   loadTopics(): void {
-    const userId = localStorage.getItem('selectedUserId') || '1';
+    const userId = localStorage.getItem('selectedUserId') || '7';
     const apiUrl = `${environment.apiBaseUrl}/api/quests/user/${userId}`;
 
     this.http.get<any>(apiUrl, {
@@ -67,7 +67,7 @@ export class JavaComponent implements OnInit {
     topic.completed = !topic.completed;
     this.calculateProgress();
     // Optionally, you could also update this change on the server here
-    const userId = localStorage.getItem('selectedUserId') || '1';
+    const userId = localStorage.getItem('selectedUserId') || '7';
     const updateUrl = `${environment.apiBaseUrl}/api/user-progress/update`;
 
     this.http.post(updateUrl, {

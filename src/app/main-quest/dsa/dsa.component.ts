@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, QueryList, ViewChildren} from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { DecimalPipe, NgForOf } from '@angular/common';
+import {DecimalPipe, NgForOf, NgIf} from '@angular/common';
 // @ts-ignore
 import { Topic } from '../../models/topic';
 import {environment} from "../../enviroment"; // Ensure this matches the correct path
@@ -10,7 +10,7 @@ import {environment} from "../../enviroment"; // Ensure this matches the correct
   selector: 'app-dsa',
   templateUrl: './dsa.component.html',
   standalone: true,
-  imports: [NgForOf, DecimalPipe, HttpClientModule],
+  imports: [NgForOf, DecimalPipe, HttpClientModule, NgIf],
   styleUrls: ['./dsa.component.scss'],
 })
 export class DsaComponent implements OnInit {
@@ -46,12 +46,14 @@ export class DsaComponent implements OnInit {
       error: (err) => console.error('Error fetching topics:', err),
     });
   }
-
+  @ViewChildren('checkbox') checkboxes!: QueryList<ElementRef<HTMLInputElement>>;
   toggleTopicCompletion(index: number): void {
     this.topics[index].completed = !this.topics[index].completed;
 
     const userId = localStorage.getItem('selectedUserId') || '7';
     const updateUrl = `${environment.apiBaseUrl}/api/user-progress/update`;
+
+
 
     this.http.post(updateUrl, {
       userId: userId,
@@ -72,6 +74,12 @@ export class DsaComponent implements OnInit {
       ? (completedTopics / this.topics.length) * 100
       : 0;
   }
+  toggleCard(index: number): void {
+    this.checkboxes.toArray()[index].nativeElement.click(); // Programmatically trigger the checkbox
+  }
+
+
+
 
   goBack(): void {
     this.router.navigate(['/main-quest']);

@@ -122,3 +122,97 @@
     }
   }
 }
+
+.daily-goal-section {
+  margin-top: 20px;
+  text-align: center;
+
+  h2 {
+    color: #ffd740; // Styling for the subtitle
+  }
+
+  input[type="number"] {
+    padding: 0.5rem;
+    margin-right: 10px;
+    width: 200px; // Fixed width for the input
+  }
+
+  button {
+    padding: 0.5rem 1rem;
+    background-color: #26a69a;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    &:hover {
+      background-color: #2bbbad;
+    }
+  }
+
+  p {
+    margin-top: 10px;
+    font-size: 1.1rem;
+    color: #fff;
+  }
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+
+    &:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+  }
+
+  input:checked + .slider {
+    background-color: #2196F3;
+  }
+
+  input:checked + .slider:before {
+    transform: translateX(26px);
+  }
+}
+
+.filter-section {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.button-row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%; /* Ensure it takes full width of the parent */
+  max-width: 960px; /* Match the width of other sections for alignment */
+  margin-top: 20px; /* Spacing from the previous section */
+}
+
+
+

@@ -11,13 +11,31 @@
     <p class="progress-text">{{ progress | number:'1.0-2' }}% Completed</p>
   </div>
 
+  <!-- Daily Goal Section -->
+  <div class="daily-goal-section">
+    <h2>Daily Goal</h2>
+    <input type="number" [(ngModel)]="dailyGoal" min="1" placeholder="Set your daily topics goal" />
+    <p>Daily Progress: {{ dailyProgress }} / {{ dailyGoal }}</p>
+    <p *ngIf="dailyConquest">Achievement Status: {{ dailyConquest.achieved ? 'Achieved' : 'Not Achieved' }}</p>
+  </div>
+
+  <div class="button-row">
+    <button (click)="setDailyGoal()" class="back-button">Set Goal</button>
+    <button (click)="toggleShowUncompletedOnly()" class="back-button">Toggle Uncompleted Topics</button>
+    <button (click)="goBack()" class="back-button">Back to Main Quest</button>
+  </div>
+
+<br>
+<br>
+
   <div class="topics-grid" [class.phone-grid]="isMobile()">
-    <div class="topic-card" *ngFor="let topic of topics; let i = index" [class.completed]="topic.completed" (click)="toggleCard(i)">
+    <div class="topic-card" *ngFor="let topic of filteredTopics; let i = index"
+         [class.completed]="topic.completed" (click)="toggleCard(i)">
       <h2>{{ topic.name }}</h2>
       <p>{{ topic.description }}</p>
       <input type="checkbox" [checked]="topic.completed" (change)="toggleTopicCompletion(i)" #checkbox/>
     </div>
   </div>
 
-  <button (click)="goBack()" class="back-button">Back to Main Quest</button>
+
 </div>

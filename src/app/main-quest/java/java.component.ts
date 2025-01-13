@@ -2,7 +2,8 @@ import {Component, ElementRef, HostListener, OnInit, QueryList, ViewChildren} fr
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import {environment} from "../../enviroment";
-import {DecimalPipe, NgForOf} from "@angular/common"; // Ensure this import points to the correct file
+import {DecimalPipe, NgForOf, NgIf} from "@angular/common";
+import {FormsModule} from "@angular/forms"; // Ensure this import points to the correct file
 
 interface Topic {
   id: number;
@@ -11,13 +12,21 @@ interface Topic {
   completed: boolean;
 }
 
+interface DailyConquest {
+  goalCount: number;
+  completedCount: number;
+  achieved: boolean;
+}
+
 @Component({
   selector: 'app-java',
   templateUrl: './java.component.html',
   standalone: true,
   imports: [
     DecimalPipe,
-    NgForOf
+    NgForOf,
+    FormsModule,
+    NgIf
   ],
   styleUrls: ['./java.component.scss']
 })
@@ -28,6 +37,15 @@ export class JavaComponent implements OnInit {
   mainQuestCompletion: number = 0;
   sideQuestCompletion: number = 0;
   overallCompletion: number = 0;
+  dailyGoal: number = 0; // Stores the daily goal set by the user
+  dailyProgress: number = 0; // Tracks the daily progress towards the goal
+  userId: number = 7;
+  showUncompletedOnly: boolean = true;
+  filteredTopics: Topic[] = [];
+  questType: string = 'Main';
+  questSubtype: string = 'Java';
+  dailyConquest: DailyConquest | null = null;
+
 
   @ViewChildren('checkbox') checkboxes!: QueryList<ElementRef<HTMLInputElement>>;
 
@@ -35,7 +53,37 @@ export class JavaComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadTopics();
+    this.fetchDailyConquest();
+   // You might want to load this from a service or local storage
   }
+
+
+  fetchDailyConquest(): void {
+    const url = `${environment.apiBaseUrl}/api/daily-conquest/today?userId=${this.userId}&questType=${this.questType}&questSubtype=${this.questSubtype}`;
+    this.http.get<DailyConquest>(url).subscribe({
+      next: (data) => {
+        this.dailyConquest = data;
+        this.dailyGoal = data.goalCount;
+        this.dailyProgress = data.completedCount;
+      },
+      error: (error) => console.error('Failed to fetch daily conquest data:', error)
+    });
+  }
+
+  incrementDailyProgress(): void {
+    const apiUrl = `${environment.apiBaseUrl}/api/daily-conquest/increment`;
+    this.http.patch(apiUrl, {
+      userId: this.userId,
+      questSubtype: 'Java'
+    }).subscribe({
+      next: (response) => {
+        console.log('Incremented daily progress successfully', response);
+        this.dailyProgress++;
+      },
+      error: (err) => console.error('Error incrementing daily progress:', err)
+    });
+  }
+
 
   loadTopics(): void {
     const userId = localStorage.getItem('selectedUserId') || '7';
@@ -60,15 +108,34 @@ export class JavaComponent implements OnInit {
     this.checkboxes.toArray()[index].nativeElement.click(); // Programmatically click the checkbox
   }
 
+  updateFilteredTopics(): void {
+    if (this.showUncompletedOnly) {
+      this.filteredTopics = this.topics.filter(topic => !topic.completed);
+    } else {
+      this.filteredTopics = this.topics;
+    }
+  }
+
+  toggleShowUncompletedOnly(): void {
+    this.showUncompletedOnly = !this.showUncompletedOnly;
+    this.updateFilteredTopics();
+  }
 
 
   toggleTopicCompletion(index: number): void {
     const topic = this.topics[index];
     topic.completed = !topic.completed;
+    const previouslyCompleted = topic.completed;
     this.calculateProgress();
+
+    if (previouslyCompleted && topic.completed) {
+      this.incrementDailyProgress();
+    }
     // Optionally, you could also update this change on the server here
     const userId = localStorage.getItem('selectedUserId') || '7';
     const updateUrl = `${environment.apiBaseUrl}/api/user-progress/update`;
+
+
 
     this.http.post(updateUrl, {
       userId: userId,
@@ -101,4 +168,33 @@ export class JavaComponent implements OnInit {
   onResize(event: any) {
     // Optional: You could recalculate some layout related variables here if needed on resize
   }
+
+  setDailyGoal(): void {
+    if (this.dailyGoal < 1) {
+      alert('Please set a valid goal.');
+      return;
+    }
+
+    const apiUrl = `${environment.apiBaseUrl}/api/daily-conquest/create`;  // Adjust this URL based on your actual environment configuration
+    const payload = {
+      userId: this.userId,               // Assuming this.userId is already defined and holds the current user's ID
+      questSubtype: 'Java',              // This could be dynamic based on the context of your application
+      goalCount: this.dailyGoal,         // The daily goal input by the user
+      questType: 'Main'                  // Static or dynamic based on your application's needs
+    };
+
+    // Headers are set automatically by Angular HttpClient, including Content-Type as application/json
+    this.http.post(apiUrl, payload, {headers: {'Accept': 'application/json'}}).subscribe({
+      next: (response) => {
+        console.log('Daily goal set successfully', response);
+        this.dailyProgress = 0;  // Reset progress when goal is set
+        // Optionally, refresh or update other parts of the component or application state here
+      },
+      error: (err) => {
+        console.error('Error setting daily goal:', err);
+        alert('Failed to set daily goal. Please try again.');
+      }
+    });
+  }
+
 }

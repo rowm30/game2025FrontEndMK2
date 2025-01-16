@@ -1,0 +1,15 @@
+<div class="daily-conquest-container">
+  <h2>Daily Conquest</h2>
+
+  <div class="goal-setting">
+    <label for="goalCount">How many topics do you plan to complete today?</label>
+    <input type="number" id="goalCount" [(ngModel)]="goalCount" />
+    <button (click)="setDailyGoal()">Set Daily Goal</button>
+  </div>
+
+  <div class="progress-display">
+    <p>Completed so far: {{ dailyProgress }} / {{ goalCount }}</p>
+    <p *ngIf="achieved">You have achieved today's goal! Congratulations!</p>
+    <button (click)="incrementProgress()" [disabled]="achieved">+1 Completion</button>
+  </div>
+</div>

@@ -9,6 +9,7 @@ import {DsaComponent} from "./main-quest/dsa/dsa.component";
 import {SpringBootComponent} from "./main-quest/spring-boot/spring-boot.component";
 import {SideQuestComponent} from "./side-quest/side-quest.component";
 import {DailyConquestComponent} from "./daily-conquest/daily-conquest.component";
+import {DsatheoryComponent} from "./main-quest/dsatheory/dsatheory.component";
 
 export const routes: Routes = [
   { path: '', redirectTo: 'app-select-user', pathMatch: 'full' },
@@ -16,6 +17,7 @@ export const routes: Routes = [
   { path: 'welcome', component: WelcomeComponent },
   { path: 'main-quest', component: MainQuestComponent },
   { path: 'main-quest/java', component: JavaComponent },
+  { path: 'main-quest/app-dsatheory', component: DsatheoryComponent },
   { path: 'main-quest/dsa', component: DsaComponent },
   { path: 'main-quest/spring-boot', component: SpringBootComponent },
   { path: 'main-quest/sql', component: SqlComponent },

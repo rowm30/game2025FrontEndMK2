@@ -7,11 +7,10 @@ import { Topic } from '../../models/topic';
 import {environment} from "../../enviroment"; // Ensure this path is correct
 
 @Component({
-  selector: 'app-sql',
-  templateUrl: './sql.component.html',
-  standalone: true,
-  imports: [NgForOf, DecimalPipe, HttpClientModule],
-  styleUrls: ['./sql.component.scss'],
+    selector: 'app-sql',
+    templateUrl: './sql.component.html',
+    imports: [NgForOf, DecimalPipe, HttpClientModule],
+    styleUrls: ['./sql.component.scss']
 })
 export class SqlComponent implements OnInit {
   topics: Topic[] = [];

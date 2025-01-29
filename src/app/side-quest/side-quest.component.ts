@@ -12,14 +12,13 @@ interface QuestProgress {
 }
 
 @Component({
-  selector: 'app-side-quest',
-  templateUrl: './side-quest.component.html',
-  standalone: true,
-  imports: [
-    NgForOf,
-    HttpClientModule
-  ],
-  styleUrls: ['./side-quest.component.scss']
+    selector: 'app-side-quest',
+    templateUrl: './side-quest.component.html',
+    imports: [
+        NgForOf,
+        HttpClientModule
+    ],
+    styleUrls: ['./side-quest.component.scss']
 })
 export class SideQuestComponent implements OnInit {
   sideQuests: QuestProgress[] = [];

@@ -6,15 +6,14 @@ import {Router} from "@angular/router";
 import {environment} from "../enviroment";
 
 @Component({
-  selector: 'app-select-user',
-  templateUrl: './select-user.component.html',
-  standalone: true, // Standalone component declaration
-  imports: [
-    HttpClientModule, // Required for HttpClient to work
-    FormsModule,
-    NgForOf
-  ],
-  styleUrls: ['./select-user.component.scss']
+    selector: 'app-select-user',
+    templateUrl: './select-user.component.html', // Standalone component declaration
+    imports: [
+        HttpClientModule, // Required for HttpClient to work
+        FormsModule,
+        NgForOf
+    ],
+    styleUrls: ['./select-user.component.scss']
 })
 export class SelectUserComponent implements OnInit {
   users: any[] = []; // List of existing users

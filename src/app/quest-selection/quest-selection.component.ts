@@ -3,13 +3,12 @@ import {Router, RouterLink} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 
 @Component({
-  selector: 'app-quest-selection',
-  templateUrl: './quest-selection.component.html',
-  imports: [
-    RouterLink
-  ],
-  standalone: true,
-  styleUrls: ['./quest-selection.component.scss']
+    selector: 'app-quest-selection',
+    templateUrl: './quest-selection.component.html',
+    imports: [
+        RouterLink
+    ],
+    styleUrls: ['./quest-selection.component.scss']
 })
 export class QuestSelectionComponent implements OnInit {
   mainQuestProgress: number = 0; // Progress for Main Quest

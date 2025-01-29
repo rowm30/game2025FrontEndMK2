@@ -15,12 +15,11 @@ interface BrainMonitor {
 }
 
 @Component({
-  selector: 'app-brain-monitor',
-  standalone: true,
-  // Add NgChartsModule to the imports
-  imports: [FormsModule, NgForOf, NgChartsModule],
-  templateUrl: './brain-monitor.component.html',
-  styleUrls: ['./brain-monitor.component.scss']
+    selector: 'app-brain-monitor',
+    // Add NgChartsModule to the imports
+    imports: [FormsModule, NgForOf, NgChartsModule],
+    templateUrl: './brain-monitor.component.html',
+    styleUrls: ['./brain-monitor.component.scss']
 })
 export class BrainMonitorComponent implements OnInit {
   monitors: BrainMonitor[] = [];

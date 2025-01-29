@@ -20,16 +20,15 @@ interface DailyConquest {
 }
 
 @Component({
-  selector: 'app-dsatheory',
-  standalone: true,
-  imports: [
-    DecimalPipe,
-    FormsModule,
-    NgForOf,
-    NgIf
-  ],
-  templateUrl: './dsatheory.component.html',
-  styleUrl: './dsatheory.component.scss'
+    selector: 'app-dsatheory',
+    imports: [
+        DecimalPipe,
+        FormsModule,
+        NgForOf,
+        NgIf
+    ],
+    templateUrl: './dsatheory.component.html',
+    styleUrl: './dsatheory.component.scss'
 })
 export class DsatheoryComponent {
   topics: Topic[] = [];

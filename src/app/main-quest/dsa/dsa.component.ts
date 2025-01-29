@@ -7,11 +7,10 @@ import { Topic } from '../../models/topic';
 import {environment} from "../../enviroment"; // Ensure this matches the correct path
 
 @Component({
-  selector: 'app-dsa',
-  templateUrl: './dsa.component.html',
-  standalone: true,
-  imports: [NgForOf, DecimalPipe, HttpClientModule, NgIf],
-  styleUrls: ['./dsa.component.scss'],
+    selector: 'app-dsa',
+    templateUrl: './dsa.component.html',
+    imports: [NgForOf, DecimalPipe, HttpClientModule, NgIf],
+    styleUrls: ['./dsa.component.scss']
 })
 export class DsaComponent implements OnInit {
   topics: Topic[] = [];

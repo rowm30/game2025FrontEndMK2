@@ -7,14 +7,13 @@ import {NgIf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 
 @Component({
-  selector: 'app-daily-conquest',
-  templateUrl: './daily-conquest.component.html',
-  standalone: true,
-  imports: [
-    NgIf,
-    FormsModule
-  ],
-  styleUrls: ['./daily-conquest.component.scss']
+    selector: 'app-daily-conquest',
+    templateUrl: './daily-conquest.component.html',
+    imports: [
+        NgIf,
+        FormsModule
+    ],
+    styleUrls: ['./daily-conquest.component.scss']
 })
 export class DailyConquestComponent implements OnInit {
   userId: number = 7;    // or get from localStorage

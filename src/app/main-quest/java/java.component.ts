@@ -19,16 +19,15 @@ interface DailyConquest {
 }
 
 @Component({
-  selector: 'app-java',
-  templateUrl: './java.component.html',
-  standalone: true,
-  imports: [
-    DecimalPipe,
-    NgForOf,
-    FormsModule,
-    NgIf
-  ],
-  styleUrls: ['./java.component.scss']
+    selector: 'app-java',
+    templateUrl: './java.component.html',
+    imports: [
+        DecimalPipe,
+        NgForOf,
+        FormsModule,
+        NgIf
+    ],
+    styleUrls: ['./java.component.scss']
 })
 export class JavaComponent implements OnInit {
   topics: Topic[] = [];

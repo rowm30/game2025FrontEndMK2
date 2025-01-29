@@ -7,11 +7,10 @@ import { Topic } from '../../models/topic';
 import {environment} from "../../enviroment"; // Ensure this matches the correct file
 
 @Component({
-  selector: 'app-spring-boot',
-  templateUrl: './spring-boot.component.html',
-  standalone: true,
-  imports: [NgForOf, DecimalPipe, HttpClientModule],
-  styleUrls: ['./spring-boot.component.scss'],
+    selector: 'app-spring-boot',
+    templateUrl: './spring-boot.component.html',
+    imports: [NgForOf, DecimalPipe, HttpClientModule],
+    styleUrls: ['./spring-boot.component.scss']
 })
 export class SpringBootComponent implements OnInit {
   topics: Topic[] = [];

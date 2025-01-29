@@ -4,11 +4,10 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import {environment} from "../enviroment";
 
 @Component({
-  selector: 'app-main-quest',
-  templateUrl: './main-quest.component.html',
-  standalone: true,
-  imports: [HttpClientModule],
-  styleUrls: ['./main-quest.component.scss'],
+    selector: 'app-main-quest',
+    templateUrl: './main-quest.component.html',
+    imports: [HttpClientModule],
+    styleUrls: ['./main-quest.component.scss']
 })
 export class MainQuestComponent implements OnInit {
   progressMap: { [key: string]: number } = {}; // Map to store progress dynamically

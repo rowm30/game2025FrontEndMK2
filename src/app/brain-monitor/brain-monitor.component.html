@@ -1,0 +1,37 @@
+<div class="brain-monitor-container">
+  <h1>Brain Monitor</h1>
+  <input type="datetime-local" [(ngModel)]="brainMonitorData.wakeUpTimestamp">
+  <button (click)="saveBrainMonitorData()">Save Data</button>
+</div>
+
+<div class="brain-monitor-container">
+  <h1>Brain Monitor Data</h1>
+  <table>
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>User ID</th>
+      <th>Timestamp</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let monitor of monitors">
+      <td>{{ monitor.id }}</td>
+      <td>{{ monitor.userId }}</td>
+      <td>{{ monitor.wakeUpTimestamp }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- CHART SECTION -->
+<div class="energy-chart-container">
+  <!-- The baseChart directive from ng2-charts displays your Chart.js chart -->
+  <canvas
+    baseChart
+    [data]="energyChartData"
+    [options]="energyChartOptions"
+    [type]="energyChartType"
+  >
+  </canvas>
+</div>

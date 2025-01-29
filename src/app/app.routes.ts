@@ -10,6 +10,7 @@ import {SpringBootComponent} from "./main-quest/spring-boot/spring-boot.componen
 import {SideQuestComponent} from "./side-quest/side-quest.component";
 import {DailyConquestComponent} from "./daily-conquest/daily-conquest.component";
 import {DsatheoryComponent} from "./main-quest/dsatheory/dsatheory.component";
+import {BrainMonitorComponent} from "./brain-monitor/brain-monitor.component";
 
 export const routes: Routes = [
   { path: '', redirectTo: 'app-select-user', pathMatch: 'full' },
@@ -24,4 +25,5 @@ export const routes: Routes = [
   { path: 'side-quest', component: SideQuestComponent },
   { path: 'quest-selection', component: QuestSelectionComponent },
   { path: 'daily-conquest', component: DailyConquestComponent },
+  { path: 'brain-monitor', component: BrainMonitorComponent },
 ];
